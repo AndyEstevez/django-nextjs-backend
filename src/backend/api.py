@@ -1,9 +1,17 @@
-from ninja import NinjaAPI
+from ninja import NinjaAPI, Schema
 
 api = NinjaAPI()
 
-@api.get("/hello")
+class UserSchema(Schema):
+    username: str
+    is_authenticated: bool
+    email: str = None
 
+@api.get("/hello")
 def hello(request):
     print(request)
     return "Hello World"
+
+@api.get("/me", response=UserSchema)
+def me(request):
+    return request.user
