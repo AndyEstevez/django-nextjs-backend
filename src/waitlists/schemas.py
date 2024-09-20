@@ -1,3 +1,4 @@
+from typing import List, Any
 from datetime import datetime
 from ninja import Schema
 from pydantic import EmailStr  # require email to have @<email-provider>.com
@@ -6,6 +7,12 @@ class WaitlistEntryCreateSchema(Schema):
     # Create -> Data
     # WaitlistEntryIn
     email: EmailStr
+
+class ErrorWaitlistEntryCreateSchema(Schema):
+    # Create -> Data
+    # WaitlistEntryIn
+    email: List[Any]
+    # non_field_errors: List[dict] = []
 
 class WaitlistEntryListSchema(Schema):
     # List -> Data
